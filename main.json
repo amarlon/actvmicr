@@ -7,3 +7,28 @@
             "AbreviationName":"AML"
     }
 }
+
+const getFirstInfot =()=>{
+   
+     const name = $("#name");
+     const urlJson= "main.json";
+
+     $.get(urlJson)
+     .done((data)=>{
+
+          const last =data.AuthorInfo.lastname;
+          const first = data.AuthorInfo.firstname;
+          const sur = data.AuthorInfo.surname;
+          const abbr = data.AuthorInfo.AbreviationName;
+
+          //update name of author
+          (sur[1])? name.html(first + ' '+last+ ' '+sur[0]) : name.html(first + ' '+last)
+
+          //update abbreviation
+          $('#dateAndYear').html('Ⓒ '+year+' - '+abbr.substring(0,3))
+         
+      
+     })
+     .fail(()=>{ alert('Check your urlJson variable for json file please')})
+     
+}
